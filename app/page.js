@@ -582,6 +582,8 @@ export default function Home() {
         </section>
       </main>
 
+      {/* test */}
+
       {/* ── Footer ── */}
       <footer className="relative w-full border-t border-gray-200 bg-white overflow-hidden mt-10">
         {/* Subtle background pattern */}
