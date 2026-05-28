@@ -32,12 +32,13 @@ export default function Page({ data, onUpdate, onUpdateStickers, side, isCover, 
   };
 
   const handleAddSticker = (url) => {
+      const nextStickerNumber = stickers.length + 1;
       const newSticker = {
-          id: Date.now().toString(),
+          id: `sticker-${nextStickerNumber}-${url.split('/').pop() || 'item'}`,
           url,
           x: 50,
           y: 50,
-          rotation: (Math.random() * 20) - 10,
+          rotation: ((nextStickerNumber % 5) - 2) * 4,
           scale: 1,
           zIndex: stickers.length + 10
       };

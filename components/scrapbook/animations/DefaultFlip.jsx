@@ -61,7 +61,7 @@ export default function DefaultFlip({
 
            // Use different translateZ values to create depth separation
            // Flipped pages sit slightly back, unflipped pages sit slightly forward
-           const zDepth = isFlipped ? -1 : 1;
+           const zDepth = isFlipped ? -0.25 : 0.25;
 
            return (
              <div
@@ -79,13 +79,15 @@ export default function DefaultFlip({
                  WebkitTransformStyle: 'preserve-3d',
                  transformOrigin: 'left center',
                  transform: isFlipped 
-                   ? `rotateY(-180deg) translateZ(${zDepth}px)` 
-                   : `rotateY(0deg) translateZ(${zDepth}px)`,
-                 transition: 'transform 0.6s cubic-bezier(0.645, 0.045, 0.355, 1)',
+                   ? `translate3d(0, 0, ${zDepth}px) rotateY(-180deg)` 
+                   : `translate3d(0, 0, ${zDepth}px) rotateY(0deg)`,
+                 transition: isActiveFlip ? 'transform 0.52s cubic-bezier(0.4, 0, 0.2, 1)' : 'none',
+                 willChange: isActiveFlip ? 'transform' : 'auto',
                  zIndex: zIndex,
                  cursor: 'pointer',
                  opacity: shouldHideFlippedSheet ? 0 : 1,
                  pointerEvents: shouldHideFlippedSheet ? 'none' : 'auto',
+                 contain: 'layout paint style',
                }}
                className="group"
              >
@@ -98,7 +100,8 @@ export default function DefaultFlip({
                    inset: 0,
                    backfaceVisibility: 'hidden',
                    WebkitBackfaceVisibility: 'hidden',
-                   transform: 'rotateY(0deg) translateZ(2px)',
+                   transform: 'translateZ(0.5px) rotateY(0deg)',
+                   WebkitTransform: 'translateZ(0.5px) rotateY(0deg)',
                    backgroundColor: bgColor || '#FFFDF5',
                  }}
                  // Matching Edit Mode Borders and visual style
@@ -119,7 +122,8 @@ export default function DefaultFlip({
                    inset: 0,
                    backfaceVisibility: 'hidden',
                    WebkitBackfaceVisibility: 'hidden',
-                   transform: 'rotateY(180deg) translateZ(2px)',
+                   transform: 'translateZ(0.5px) rotateY(180deg)',
+                   WebkitTransform: 'translateZ(0.5px) rotateY(180deg)',
                    backgroundColor: bgColor || '#FFFDF5',
                    // Hide the back face if there's no content
                    visibility: sheet.back ? 'visible' : 'hidden',

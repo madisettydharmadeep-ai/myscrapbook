@@ -159,11 +159,15 @@ h1, h2, h3, h4, h5, h6 {
   .preserve-3d {
     -webkit-transform-style: preserve-3d;
     transform-style: preserve-3d;
+    -webkit-perspective: 1000;
+    perspective: 1000;
   }
   
   .backface-hidden {
     -webkit-backface-visibility: hidden;
     backface-visibility: hidden;
+    -webkit-transform: translateZ(0);
+    transform: translateZ(0);
   }
   
   /* Prevent flickering during animations */

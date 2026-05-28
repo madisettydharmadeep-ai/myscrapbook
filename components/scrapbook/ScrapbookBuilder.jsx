@@ -110,6 +110,11 @@ export default function ScrapbookBuilder() {
           bgColor,
           pageBorder,
           soundId,
+          title,
+          animId,
+          appBackground,
+          pageBgImage,
+          pageBgOpacity,
       };
 
       const handler = setTimeout(() => {
@@ -118,7 +123,7 @@ export default function ScrapbookBuilder() {
       }, 1000); // Debounce 1s
 
       return () => clearTimeout(handler);
-  }, [pages, bgPattern, bgColor, pageBorder, soundId, title, animId, isInitialized, user, pageBgImage, pageBgOpacity]);
+  }, [pages, bgPattern, bgColor, pageBorder, soundId, title, animId, appBackground, isInitialized, user, pageBgImage, pageBgOpacity]);
 
   const handleContinueDraft = () => {
     if (draftData) {
@@ -128,6 +133,8 @@ export default function ScrapbookBuilder() {
         setPageBorder(draftData.pageBorder || pageBorder);
         setSoundId(draftData.soundId || soundId);
         setTitle(draftData.title || title);
+        setAnimId(draftData.animId || animId);
+        setAppBackground(draftData.appBackground || 'none');
         if (draftData.source === 'guest') {
             localStorage.removeItem('scrapbook_draft_guest');
         }
@@ -225,7 +232,7 @@ export default function ScrapbookBuilder() {
     if (!user) {
         // Force save draft before redirecting to login
         const currentData = {
-           pages, bgPattern, bgColor, pageBorder, soundId, title, animId, pageBgImage, pageBgOpacity
+           pages, bgPattern, bgColor, pageBorder, soundId, title, animId, appBackground, pageBgImage, pageBgOpacity
         };
         localStorage.setItem('scrapbook_draft', JSON.stringify(currentData));
         router.push('/login?redirect=/scrapbook');

@@ -31,10 +31,30 @@ const FONT_STYLES = [
     headingWeight: '700',
     bodyWeight: '400'
   },
+  { 
+    id: 'soft-note', 
+    label: 'Soft Note', 
+    emoji: '♡',
+    headingFont: 'var(--font-caveat)', 
+    bodyFont: 'var(--font-space-grotesk)',
+    headingWeight: '700',
+    bodyWeight: '500'
+  },
+  { 
+    id: 'storybook', 
+    label: 'Storybook', 
+    emoji: '✦',
+    headingFont: 'var(--font-cormorant)', 
+    bodyFont: 'var(--font-space-grotesk)',
+    headingWeight: '800',
+    bodyWeight: '400'
+  },
 ];
 
 // Preset Colors
 const COLOR_PRESETS = [
+  '#FFF7ED', '#FFF1F2', '#FDF2F8', '#F5F3FF',
+  '#EFF6FF', '#ECFEFF', '#F0FDF4', '#FEFCE8',
   '#000000', '#1F2937', '#374151', '#4B5563', 
   '#EF4444', '#F97316', '#EAB308', '#22C55E',
   '#14B8A6', '#3B82F6', '#8B5CF6', '#EC4899',

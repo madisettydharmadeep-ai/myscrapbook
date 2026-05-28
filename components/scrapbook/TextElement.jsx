@@ -31,6 +31,24 @@ const FONT_STYLES = [
     headingWeight: '700',
     bodyWeight: '400'
   },
+  { 
+    id: 'soft-note', 
+    label: 'Soft Note', 
+    emoji: '♡',
+    headingFont: 'var(--font-caveat)', 
+    bodyFont: 'var(--font-space-grotesk)',
+    headingWeight: '700',
+    bodyWeight: '500'
+  },
+  { 
+    id: 'storybook', 
+    label: 'Storybook', 
+    emoji: '✦',
+    headingFont: 'var(--font-cormorant)', 
+    bodyFont: 'var(--font-space-grotesk)',
+    headingWeight: '800',
+    bodyWeight: '400'
+  },
 ];
 
 // Export for use in drawer

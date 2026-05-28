@@ -508,8 +508,8 @@ export default function Home() {
                   genuinely mean the world to me. no pressure — ever.
                 </p>
 
-                <div className="mt-auto self-start md:self-stretch">
-                  <SupportButton size="large" />
+                <div className="mt-auto self-stretch">
+                  <SupportButton size="large" fullWidth />
                 </div>
               </div>
             </div>

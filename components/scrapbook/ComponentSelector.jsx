@@ -1,6 +1,6 @@
 'use client';
 import React from 'react';
-import { Image, Type, X, Sticker, Sparkles, Gift } from 'lucide-react';
+import { Image as ImageIcon, Type, X, Gift, Clock, Mic2, MapPinned } from 'lucide-react';
 
 export default function ComponentSelector({ onSelect, onClose }) {
   return (
@@ -24,10 +24,10 @@ export default function ComponentSelector({ onSelect, onClose }) {
                     className="group relative overflow-hidden bg-gray-50 border border-gray-200 p-5 rounded-2xl text-left hover:bg-white hover:border-rose-200 hover:shadow-xl hover:-translate-y-1 transition-all duration-300"
                 >
                     <div className="absolute top-0 right-0 p-4 opacity-5 group-hover:opacity-10 transition-opacity">
-                         <Image className="w-24 h-24" />
+                         <ImageIcon className="w-24 h-24" />
                     </div>
                     <div className="bg-white text-gray-900 w-12 h-12 rounded-xl flex items-center justify-center mb-4 shadow-sm group-hover:scale-110 group-hover:rotate-3 transition-transform">
-                        <Image className="w-6 h-6 text-rose-500" />
+                        <ImageIcon className="w-6 h-6 text-rose-500" />
                     </div>
                     <h3 className="text-lg font-bold text-gray-900">Photo</h3>
                     <p className="text-xs font-medium text-gray-500 mt-1 group-hover:text-gray-600">Upload or add images</p>
@@ -61,15 +61,17 @@ export default function ComponentSelector({ onSelect, onClose }) {
                     <p className="text-xs font-medium text-gray-500 mt-1 group-hover:text-gray-600">Hidden surprise to reveal</p>
                  </button>
 
-                 {/* Coming Soon Options */}
-                 <div className="relative overflow-hidden bg-gray-50 border border-gray-100 p-5 rounded-2xl text-left opacity-60">
-                    <div className="bg-gray-100 text-gray-300 w-12 h-12 rounded-xl flex items-center justify-center mb-4">
-                        <Sticker className="w-6 h-6" />
-                    </div>
-                    <h3 className="text-lg font-bold text-gray-400">Stickers</h3>
-                    <div className="absolute top-4 right-4 bg-gray-200/50 text-gray-500 text-[10px] font-bold px-2 py-1 rounded-full uppercase tracking-wider">
-                        Soon
-                    </div>
+                 <div className="grid grid-cols-3 gap-2">
+                    {[
+                        { icon: Clock, label: 'Timeline' },
+                        { icon: Mic2, label: 'Voice' },
+                        { icon: MapPinned, label: 'Places' },
+                    ].map(({ icon: Icon, label }) => (
+                        <div key={label} className="rounded-2xl border border-gray-100 bg-gray-50 px-3 py-4 text-center opacity-60">
+                            <Icon className="mx-auto mb-2 h-5 w-5 text-gray-300" />
+                            <p className="text-[10px] font-bold uppercase tracking-wide text-gray-400">{label}</p>
+                        </div>
+                    ))}
                  </div>
             </div>
 

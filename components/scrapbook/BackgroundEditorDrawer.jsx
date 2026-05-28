@@ -4,33 +4,12 @@ import { X, Check, ChevronDown } from 'lucide-react';
 import { useAudio } from '@/context/AudioContext';
 
 
-// APP BACKGROUND OPTIONS
-const APP_BACKGROUNDS = [
-  { 
-      id: 'none', 
-      label: 'None', 
-      value: 'none', 
-      thumbnail: '' 
-  },
-  { 
-      id: 'kawai-camp', 
-      label: 'Kawai Camp', 
-      value: 'url("/backgrounds/kawai-camp.webp")', 
-      thumbnail: '/backgrounds/kawai-camp.webp' 
-  },
-  { 
-      id: 'kawai-aliens', 
-      label: 'Kawai Aliens', 
-      value: 'url("/backgrounds/kawai-aliens.webp")', 
-      thumbnail: '/backgrounds/kawai-aliens.webp' 
-  },
-  { 
-      id: 'kawai-pink', 
-      label: 'Kawai Pink', 
-      value: 'url("/backgrounds/kawai-pink-bg.webp")', 
-      thumbnail: '/backgrounds/kawai-pink-bg.webp' 
-  }
-];
+// Helper to extract raw URL from CSS url() wrapper
+const getRawAppBgUrl = (bg) => {
+  if (!bg || bg === 'none') return '';
+  const match = bg.match(/^url\(['"]?(.*?)['"]?\)$/);
+  return match ? match[1] : bg;
+};
 
 // Collapsible Section Component
 function AccordionSection({ title, icon, isOpen, onToggle, selectedLabel, children }) {
@@ -102,33 +81,44 @@ export default function BackgroundEditorDrawer({ bgPattern, setBgPattern, bgColo
 
                 {/* APP BACKGROUND SECTION */}
                 <AccordionSection
-                  title="App Background"
+                  title="App Background Image"
                   icon="🖼️"
                   isOpen={openSection === 'appBg'}
                   onToggle={() => toggleSection('appBg')}
-                  selectedLabel={appBackground === 'none' ? 'None' : 'Custom'}
+                  selectedLabel={appBackground && appBackground !== 'none' ? 'Custom Image' : 'None'}
                 >
-                  <div className="grid grid-cols-2 gap-3">
-                    {APP_BACKGROUNDS.map((bg) => (
-                        <button
-                            key={bg.id}
-                            onClick={() => setAppBackground(bg.value)}
-                            className={`p-3 border rounded-xl flex flex-col items-center justify-center gap-2 aspect-square transition-all ${
-                              (appBackground === bg.value || (bg.value !== 'none' && appBackground?.includes(bg.value.replace(/url\("|"\)/g, '').split('?')[0])))
-                                ? 'border-rose-400 bg-rose-50 text-rose-700 shadow-sm' 
-                                : 'border-gray-100 hover:border-gray-300 hover:bg-gray-50'
-                            }`}
-                        >
-                           {bg.id === 'none' ? (
-                               <div className="w-10 h-10 bg-gray-200 rounded-full flex items-center justify-center border border-gray-300">
-                                   <X className="w-5 h-5 text-gray-400" />
-                               </div>
-                           ) : (
-                               <img src={bg.thumbnail} className="w-12 h-12 object-cover rounded-md" alt={bg.label} />
-                           )}
-                           <span className="font-bold text-xs">{bg.label}</span>
-                        </button>
-                    ))}
+                  <div className="flex flex-col gap-4">
+                      <div className="flex flex-col gap-2">
+                          <label className="text-xs font-bold text-gray-500 uppercase tracking-wide">Image URL</label>
+                          <div className="flex gap-2">
+                              <input
+                                type="text"
+                                value={appBackground && appBackground !== 'none' ? getRawAppBgUrl(appBackground) : ''}
+                                onChange={(e) => {
+                                  const val = e.target.value;
+                                  if (!val || val.trim() === '') {
+                                    setAppBackground('none');
+                                  } else {
+                                    setAppBackground(`url("${val.trim()}")`);
+                                  }
+                                }}
+                                className="w-full px-3 py-2 border border-gray-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-rose-400 focus:border-transparent"
+                                placeholder="Paste image URL..."
+                              />
+                               {appBackground && appBackground !== 'none' && (
+                                  <button 
+                                      onClick={() => setAppBackground('none')}
+                                      className="p-2 text-gray-400 hover:text-red-500 hover:bg-red-50 rounded-lg transition-colors border border-gray-200"
+                                      title="Clear Image"
+                                  >
+                                      <X className="w-5 h-5" />
+                                  </button>
+                               )}
+                          </div>
+                          <p className="text-[10px] text-gray-400">
+                             Paste a direct link to an image (ending in .png, .jpg, etc). This will appear as the background of the entire app.
+                          </p>
+                      </div>
                   </div>
                 </AccordionSection>
 
