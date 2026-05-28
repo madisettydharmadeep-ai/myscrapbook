@@ -119,13 +119,15 @@ export default function Home() {
             </Link>
 
             <a
-              href="https://buymeacoffee.com/bobacreates"
+              href="https://ko-fi.com/kazama_studiooo"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 px-5 py-3 rounded-full font-medium border border-amber-300 text-amber-700 bg-amber-50 hover:bg-amber-100 transition-all hover:scale-105"
+              className="group inline-flex items-center gap-2.5 rounded-full border-2 border-[#ffbdd5] bg-[#fff4f8] px-5 py-3 font-black text-[#5c4351] shadow-[0_5px_0_0_#f8b6ca] transition-all hover:-translate-y-0.5 hover:bg-white hover:shadow-[0_7px_0_0_#f8b6ca] active:translate-y-0.5 active:shadow-[0_2px_0_0_#f8b6ca]"
             >
-              <Coffee className="w-4 h-4" />
-              <span>buy me a coffee</span>
+              <span className="flex h-7 w-7 items-center justify-center rounded-full bg-white shadow-inner shadow-rose-100 transition-transform group-hover:rotate-[-6deg] group-hover:scale-110">
+                <img src="/kofi_symbol.png" alt="" className="h-5 w-5 object-contain" />
+              </span>
+              <span>Support me on Ko-fi</span>
             </a>
           </div>
         </section>

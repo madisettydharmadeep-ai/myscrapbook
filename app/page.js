@@ -6,7 +6,6 @@ import {
   Heart,
   Sparkles,
   User,
-  Coffee,
   Camera,
   PenLine,
   Palette,
@@ -191,19 +190,7 @@ export default function Home() {
               <ArrowRight className="w-5 h-5" strokeWidth={2.5} />
             </Link>
 
-            <a
-              href="https://ko-fi.com/kazama_studiooo"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-3 px-8 py-4 rounded-full font-bold text-lg bg-[#FFDD00] text-[#1a1a1a] transition-all duration-200 hover:brightness-95 hover:-translate-y-0.5 active:scale-[0.98] active:translate-y-0 shadow-[0_4px_0_0_#d9bc00] hover:shadow-[0_6px_0_0_#d9bc00] active:shadow-none"
-            >
-              <img
-                src="/kofi_symbol.png"
-                alt="Ko-fi"
-                className="w-6 h-6 object-contain"
-              />
-              <span>Support me on Ko-fi</span>
-            </a>
+            <SupportButton size="large" />
           </div>
         </section>
 
@@ -488,11 +475,15 @@ export default function Home() {
               </Link>
             </div>
 
-            {/* Buy me a coffee */}
+            {/* Ko-fi support */}
             <div className="relative rounded-2xl border-2 border-amber-200 bg-gradient-to-br from-amber-50 to-rose-50 p-8 md:p-10 flex flex-col overflow-hidden shadow-sm">
               <div className="relative flex-1 flex flex-col">
                 <div className="w-14 h-14 rounded-2xl bg-amber-100 flex items-center justify-center mb-6">
-                  <Coffee className="w-6 h-6 text-amber-600" />
+                  <img
+                    src="/kofi_symbol.png"
+                    alt=""
+                    className="h-8 w-8 object-contain"
+                  />
                 </div>
 
                 <p className="text-xs font-bold text-amber-600 uppercase tracking-widest mb-3">
@@ -518,19 +509,7 @@ export default function Home() {
                 </p>
 
                 <div className="mt-auto self-start md:self-stretch">
-                  <a
-                    href="https://ko-fi.com/kazama_studiooo"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex items-center gap-3 px-8 py-4 rounded-full font-bold text-lg bg-[#FFDD00] text-[#1a1a1a] transition-all duration-200 hover:brightness-95 hover:-translate-y-0.5 active:scale-[0.98] active:translate-y-0 shadow-[0_4px_0_0_#d9bc00] hover:shadow-[0_6px_0_0_#d9bc00] active:shadow-none"
-                  >
-                    <img
-                      src="/kofi_symbol.png"
-                      alt="Ko-fi"
-                      className="w-6 h-6 object-contain"
-                    />
-                    <span>Support me on Ko-fi</span>
-                  </a>
+                  <SupportButton size="large" />
                 </div>
               </div>
             </div>
