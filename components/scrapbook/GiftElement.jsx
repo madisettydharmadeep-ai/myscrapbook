@@ -617,11 +617,11 @@ export default function GiftElement({
 
     const handlePop = (e) => {
       e.stopPropagation();
-      if (!readOnly || isOpen) return;
+      if (isOpen) return;
 
       playSound("balloon-burst");
 
-      const rect = e.target.getBoundingClientRect();
+      const rect = e.currentTarget.getBoundingClientRect();
       const x = (rect.left + rect.width / 2) / window.innerWidth;
       const y = (rect.top + rect.height / 2) / window.innerHeight;
 
@@ -640,8 +640,11 @@ export default function GiftElement({
       <div className="relative w-full h-full flex items-center justify-center min-h-[300px]">
         {!isOpen ? (
           <div
-            onClick={handlePop}
-            className="relative cursor-pointer group hover:-translate-y-4 transition-transform duration-500 ease-in-out animate-[bounce_3s_infinite]"
+            onClick={(e) => {
+              console.log("POP CLICKED");
+              handlePop(e);
+            }}
+            className="relative cursor-pointer group hover:-translate-y-3 transition-transform duration-500 ease-in-out"
           >
             {/* --- THE BALLOON --- */}
             <div className="relative z-20 hover:scale-105 transition-transform duration-300 drop-shadow-xl">
@@ -723,37 +726,73 @@ export default function GiftElement({
           </div>
         ) : (
           <div
-            className="animate-in zoom-in-50 duration-500 ease-out max-w-sm w-full relative"
+            className="animate-in fade-in zoom-in-95 duration-500 max-w-sm w-full px-6"
             onClick={(e) => e.stopPropagation()}
           >
-            <div className="absolute -top-6 -left-6 text-4xl animate-bounce delay-100">
-              ☁️
-            </div>
-            <div className="bg-[#FFFBEB] p-6 rounded-[30px] shadow-xl border-[6px] border-[#FCD34D] border-dashed flex flex-col items-center gap-4 relative overflow-hidden">
-              <h3 className="text-2xl font-black text-yellow-500 tracking-wider uppercase">
-                Yay!
-              </h3>
-              <div className="w-full bg-white rounded-2xl p-4 shadow-sm border-2 border-yellow-100">
+            <div className="relative">
+              {/* Note */}
+              <div
+                className="
+        bg-white/90
+        backdrop-blur-sm
+        rounded-3xl
+        px-8
+        py-8
+        shadow-[0_12px_40px_rgba(0,0,0,0.08)]
+      "
+              >
+                <div className="mb-6 flex justify-center">
+                  <div className="w-2 h-2 rounded-full bg-rose-300" />
+                </div>
+
                 {giftContent.type === "image" ? (
                   <img
                     src={giftContent.data}
-                    className="w-full h-auto rounded-lg object-contain"
+                    className="w-full h-auto rounded-2xl object-contain"
                   />
                 ) : (
-                  <p className="text-center text-lg text-gray-700 font-medium font-handwriting">
+                  <p
+                    className="
+            text-center
+            text-[18px]
+            leading-9
+            text-zinc-700
+            whitespace-pre-wrap
+            font-light
+          "
+                  >
                     {giftContent.data}
                   </p>
                 )}
+
+                <div className="mt-6 text-center">
+                  <span className="text-zinc-300 text-xl">♡</span>
+                </div>
               </div>
+
               {readOnly && (
                 <button
                   onClick={(e) => {
                     e.stopPropagation();
                     setIsOpen(false);
                   }}
-                  className="text-xs font-bold text-yellow-600 uppercase tracking-widest bg-yellow-100 px-4 py-1 rounded-full"
+                  className="
+          absolute
+          -top-2
+          -right-2
+          w-8
+          h-8
+          rounded-full
+          bg-white
+          shadow-md
+          flex
+          items-center
+          justify-center
+          text-zinc-400
+          hover:text-zinc-700
+        "
                 >
-                  Reset
+                  <X className="w-4 h-4" />
                 </button>
               )}
             </div>

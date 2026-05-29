@@ -40,6 +40,9 @@ export default function BinderFlip({
         {/* FLIPPING STACK */}
         {sheets.map((sheet, index) => {
            const isFlipped = index < currentSheetIndex;
+           const isCurrentPage = index === currentSheetIndex;
+           const isPreviousPage = index === currentSheetIndex - 1;
+           const isActiveFlip = isCurrentPage || isPreviousPage;
            const zIndex = isFlipped ? index : (sheets.length - index);
 
            // CRITICAL: When on a cover page, completely hide ALL flipped sheets
@@ -85,7 +88,7 @@ export default function BinderFlip({
                  cursor: 'pointer',
                  // Fade out flipped sheets on cover pages (with delay to allow flip animation to complete)
                  opacity: shouldHideFlippedSheet ? 0 : 1,
-                 pointerEvents: shouldHideFlippedSheet ? 'none' : 'auto',
+                 pointerEvents: (isActiveFlip && !shouldHideFlippedSheet) ? 'auto' : 'none',
                }}
                className="group"
              >
@@ -96,7 +99,8 @@ export default function BinderFlip({
                    inset: 0,
                    backfaceVisibility: 'hidden',
                    transform: 'rotateY(0deg)',
-                   backgroundColor: bgColor || '#FFFDF5'
+                   backgroundColor: bgColor || '#FFFDF5',
+                   pointerEvents: isFlipped ? 'none' : 'auto',
                  }}
                  className={`overflow-hidden border-4 border-l-0 border-black border-y-4 border-r-4 rounded-r-md`}
                >
@@ -114,7 +118,8 @@ export default function BinderFlip({
                    transform: 'rotateY(180deg)',
                    backgroundColor: bgColor || '#FFFDF5',
                    // Hide the back face on cover pages (1/n and n/n)
-                   visibility: isCoverPage ? 'hidden' : 'visible'
+                   visibility: isCoverPage ? 'hidden' : 'visible',
+                   pointerEvents: isFlipped ? 'auto' : 'none',
                  }}
                  className={`overflow-hidden border-4 border-r-0 border-black border-y-4 border-l-4 rounded-l-md`}
                >

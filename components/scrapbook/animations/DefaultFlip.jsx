@@ -86,7 +86,7 @@ export default function DefaultFlip({
                  zIndex: zIndex,
                  cursor: 'pointer',
                  opacity: shouldHideFlippedSheet ? 0 : 1,
-                 pointerEvents: shouldHideFlippedSheet ? 'none' : 'auto',
+                 pointerEvents: (isActiveFlip && !shouldHideFlippedSheet) ? 'auto' : 'none',
                  contain: 'layout paint style',
                }}
                className="group"
@@ -103,6 +103,7 @@ export default function DefaultFlip({
                    transform: 'translateZ(0.5px) rotateY(0deg)',
                    WebkitTransform: 'translateZ(0.5px) rotateY(0deg)',
                    backgroundColor: bgColor || '#FFFDF5',
+                   pointerEvents: isFlipped ? 'none' : 'auto',
                  }}
                  // Matching Edit Mode Borders and visual style
                  className={`overflow-hidden ${borderClass} border-l-0 ${styleConfig.rounded} ${styleConfig.shadow}`}
@@ -127,6 +128,7 @@ export default function DefaultFlip({
                    backgroundColor: bgColor || '#FFFDF5',
                    // Hide the back face if there's no content
                    visibility: sheet.back ? 'visible' : 'hidden',
+                   pointerEvents: isFlipped ? 'auto' : 'none',
                  }}
                  // Matching Edit Mode Borders
                  className={`overflow-hidden ${borderClass} border-r-0 ${styleConfig.rounded}`}
